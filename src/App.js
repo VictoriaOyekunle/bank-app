@@ -15,6 +15,8 @@ import Transaction from './components/Transaction';
 import Fund from './components/Fund';
 import Withdraw from './components/Withdraw';
 import Transfer from './components/Transfer';
+import Withdraws from './components/Withdraws';
+import Transfers from './components/Transfers';
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 // import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons'
@@ -80,6 +82,8 @@ function App() {
       <Route path = "/dashboard/transfer" element = {<Transfer/>}/>
       <Route path = "/dashboard/fund" element = {<Fund/>} />
       <Route path = "/dashboard/withdraw" element = {<Withdraw/>}/>
+      <Route path = "/dashboard/transaction/withdraws" element = {<Withdraws/>}/>
+      <Route path = "/dashboard/transaction/transfers" element = {<Transfers/>}/>
       <Route path= "/*" element={<NotFound/>}/>
     </Routes>
     <Footer/>

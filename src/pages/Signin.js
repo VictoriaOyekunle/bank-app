@@ -26,7 +26,8 @@ const Signin = () => {
       //   display:'none'
       // }
         e.preventDefault();
-      seterr(err.className = "d-block");
+        alert('Wrong details')
+      // seterr(err.className = "d-block");
     }
   }
   return (

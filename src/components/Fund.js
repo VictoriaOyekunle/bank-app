@@ -1,19 +1,44 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import fund from '../images/fund (2).png'
 
 const Fund = () => {
-    let dash = JSON.parse(localStorage.logins)
-    // console.log(dash.acctno)
-    let welcome = `Welcome back, ${dash.firstname}😊
-    `
-    let totalBal;
-    const [amount, setamount] = useState("")
-    const submit = (e) => {
-      totalBal = parseInt(dash.accountBal + amount);
-      console.log(totalBal);
-      alert('Your Wallet have been succesfully funded')
-      // e.preventDefault();
+  const [dash, setdash] = useState({});
+  const [amount, setamount] = useState("")
+  const [date, setdate] = useState('')
+  const [time, settime] = useState('')
+  // const [dashAllHistory, setdashAllHistory] = useState([])
+  // const [deposit, setdeposit] = useState(second)
+  // const [histories, sethistories] = useState([])
+  
+  
+
+  useEffect (()=> {
+    setdash(JSON.parse(localStorage.logins))
+  }, [])
+//  useEffect(()=> {
+//   setdashAllHistory(allHistory)
+//  }, [])
+  let navigate = useNavigate();
+  let welcome = `Welcome back, ${dash.firstname}😊`
+  
+  const submit = (e) => {
+    let newBal = Number(dash.accountBal) + Number(amount)
+    let depositor = dash.firstname + " "+ dash.lastname
+      let newdepositHistory = {depositor, amount, date, time}
+      let allHistory = dash.allHistories.depositHistories
+      let depositHistories =[...allHistory, newdepositHistory]
+      // let depositHistories =[{depositor, amount, date, time}]
+      let withdrawalHistories =[]
+      let transferHistories = []
+      let allHistories = {depositHistories, withdrawalHistories, transferHistories}
+      setdash((d)=>({...d, accountBal:newBal, allHistories}))
+      localStorage.setItem("logins", JSON.stringify({...dash, accountBal:newBal, allHistories}));
+      let applicants = JSON.parse(localStorage.applicants).map((each, i)=>dash.email === each.email ? {...each, accountBal:newBal, allHistories} : each);
+      localStorage.setItem("applicants", JSON.stringify(applicants));
+      alert('Your account has been funded with $'+Number(amount))
+      navigate('/dashboard')
+      // console.log(depositHistories);
     }
   return (
     <>
@@ -34,9 +59,9 @@ const Fund = () => {
         </ul>
       </div>
       <div className="col-md-10 bg-light dashContent2 py-4">
-        <div className="container my-5 shadow rounded w-75">
+        <div className="container my-5 shadow rounded w-75 ">
           <div className="row">
-             <div className="col-md-7 body">
+             <div className="col-md-7 body profileImage">
                <img src={fund} alt="" />
             </div>
              <div className="col-md-5 border ">
@@ -46,10 +71,13 @@ const Fund = () => {
                <input type="text" className='form-control p-2  mt-4' value={dash.firstname} required/>
               <input type="text" className='form-control p-2 mt-2' value={dash.lastname} required/>
               <input type="number" className='form-control p-2 mt-2' placeholder="Amount to Deposit"
-              onChange={(e)=>setamount(e.target.value)} required/>
+              onChange={(e)=>setamount(e.target.value)} value={amount}/>
               <input type="number" className='form-control p-2 mt-2'value={dash.acctno} required/>
-            
-                <button className='btn text-white w-100 my-5'>Deposit</button>
+                <input type="date" className='form-control p-2 mt-2' placeholder="Purpose of withdrawal"
+                onChange={(e)=>setdate(e.target.value)} required/>
+                <input type="time" className='form-control p-2 mt-2' placeholder="Purpose of withdrawal"
+                onChange={(e)=>settime(e.target.value)} required/>
+                <button className='btn text-white w-100 mt-4 mb-3'>Deposit</button>
             </form>
           </div> 
           </div>

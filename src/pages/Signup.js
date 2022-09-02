@@ -19,6 +19,8 @@ import signup from '../images/card.jpg'
   
   const sign = (e) => {
     if (firstname !== "" && lastname !== "" && email !== "" && password !== "" && phonenumber !== "") { 
+      let val = applicantArr.find(val=>val.email !== email)
+       if (val) {
         let acctno = `0264${Math.floor(Math.random()*1000000)}`
         let cardno = `431${Math.floor(Math.random()*100000000)}`
         let bvn = `${Math.floor(Math.random()*100000000000000)}`
@@ -28,6 +30,10 @@ import signup from '../images/card.jpg'
         alert(`You have successfully been registered. Your account number is ${acctno}`)
         navigate('/signin')
         localStorage.applicants = JSON.stringify(userArr) 
+       }else {
+        alert('Email already exist')
+        e.preventDefault();
+       }
     }
   }
   return (
@@ -42,12 +48,7 @@ import signup from '../images/card.jpg'
           <div className="col-md-4">
             <p className='signinText text-center'>Sign up</p>
             <hr />
-            <form action="">
-            {/* <input type="text" placeholder='First Name' className='form-control p-2 mt-4'onChange={first} required/>
-              <input type="text" placeholder='Last Name' className='form-control p-2 mt-2'onChange={last} required/>
-              <input type="email" placeholder='E-mail' className='form-control p-2 mt-2'onChange={emails} required/>
-              <input type="password" placeholder='Password' className='form-control p-2 mt-2'onChange={pass} required/>
-              <input type="number" placeholder='Phone Number' className='form-control p-2 mt-2'onChange={phoneno} required/> */}
+            <form onSubmit={sign}>
               <input type="text" placeholder='First Name' className='form-control p-2 mt-4'onChange={(e)=>setfirstname(e.target.value)} required/>
               <input type="text" placeholder='Last Name' className='form-control p-2 mt-2'onChange={(e)=>setlastname(e.target.value)} required/>
               <input type="email" placeholder='E-mail' className='form-control p-2 mt-2'onChange={(e)=>setemail(e.target.value)} required/>
@@ -55,7 +56,7 @@ import signup from '../images/card.jpg'
               <input type="number" placeholder='Phone Number' className='form-control p-2 mt-2'onChange={(e)=>setphonenumber(e.target.value)} required/>
               <input type="checkbox" name="" id=""  required/> <small className='text-danger'>Agree with the terms and conditions</small>
               {/* <Link to="/signin"> */}
-                <button className='btn text-white w-100 mt-4 mb-4' onClick={sign}>Sign up </button>
+                <button className='btn text-white w-100 mt-4 mb-4'>Sign up </button>
                 {/* </Link> */}
             </form>
             <center>

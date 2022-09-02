@@ -14,6 +14,10 @@ const Profile = () => {
   const [editacct, seteditacct] = useState("")
   const [alledits, setalledits] = useState([])
 
+  // const name = (e) => {
+  //   seteditfn(dash.firstname)
+  //   seteditfn(e.target.value);
+  // }
   const submit = (e) => {
     let editted = {editfn, editln, editem, editpw, editpn, editacct}
     let editUser = [...alledits, editted]
@@ -44,7 +48,7 @@ const Profile = () => {
       <div className="col-md-10 bg-light dashContent2 py-3">
         <div className="container my-5 shadow rounded w-75">
           <div className="row">
-             <div className="col-md-7">
+             <div className="col-md-7 profileImage">
                <img src={profile} alt=""/>
             </div>
              <div className="col-md-5 border ">

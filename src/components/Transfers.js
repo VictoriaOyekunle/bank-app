@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Transaction = () => {
-  const [historyArr, sethistoryArr] = useState([])
+const Transfers = () => {
+    const [historyArr, sethistoryArr] = useState([])
   let dash = JSON.parse(localStorage.logins)
   let welcome = `Welcome back, ${dash.firstname}😊`
   useEffect(()=> {
-    sethistoryArr(dash.allHistories.depositHistories)
+    sethistoryArr(dash.allHistories.transferHistories)
   }, [])
   return (
     <>
@@ -31,7 +31,7 @@ const Transaction = () => {
       <div className="container-fliud">
         <div className="row">
           <div className="col-md-4">
-           <Link to='/dashboard/transaction/'><button className='btn text-white bg-success'>Deposit Transaction</button></Link>
+           <Link to='/dashboard/transaction'><button className='btn text-white bg-success'>Deposit Transaction</button></Link>
           </div>
           <div className="col-md-4">
             <Link to='/dashboard/transaction/withdraws'><button className='btn text-white bg-danger margins'>Withdraw Transaction</button></Link>
@@ -40,12 +40,14 @@ const Transaction = () => {
             <Link to='/dashboard/transaction/transfers'><button className='btn text-white margins'>Transfer Transaction</button></Link>
           </div>
         </div>
-        <p className='text-success mt-4'>Deposit Transactions</p>
+        <p className='textColor mt-4'>Withdraw Transactions</p>
         <table className='table table-striped border'>
          <thead>
          <tr className='border border-dark'>
             <th>S/N</th>
-            <th>Name</th>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>Purpose</th>
             <th>Amount</th>
             <th>Time</th>
             <th>Date</th>
@@ -55,8 +57,10 @@ const Transaction = () => {
             {historyArr.map((each, i)=>(
                 <tr key={i}>
                     <td>{i+1}</td>
-                    <td>{each.depositor}</td>
-                    <td>{each.amount}</td>
+                    <td>{each.accountName}</td>
+                    <td>{each.acctnum}</td>
+                    <td>{each.purpose}</td>
+                    <td>{each.transAmt}</td>
                     <td>{each.time}</td>
                     <td>{each.date}</td>
                 </tr>
@@ -73,4 +77,4 @@ const Transaction = () => {
   )
 }
 
-export default Transaction
+export default Transfers
