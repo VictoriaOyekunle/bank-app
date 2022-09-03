@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import signup from '../images/card.jpg'
 
-// const Signup = (user, first, last, phoneno, pass, emails) => {
   const Signup = () => {
   const navigate = useNavigate()
   const [firstname, setfirstname] = useState("")
@@ -12,28 +11,40 @@ import signup from '../images/card.jpg'
   const [phonenumber, setphonenumber] = useState("")
   const [alluser, setalluser] = useState([])
 
-  let applicantArr = JSON.parse(localStorage.applicants)
+  let applicantArr = []
+  if (localStorage.applicants != null){
+    applicantArr = JSON.parse(localStorage.applicants)
+  }else {
+    applicantArr = []
+  }
   useEffect (()=> {
     setalluser(applicantArr)
   }, [])
   
   const sign = (e) => {
     if (firstname !== "" && lastname !== "" && email !== "" && password !== "" && phonenumber !== "") { 
-      let val = applicantArr.filter(val=>val.email !== email)
-       if (val) {
+      let val = applicantArr.find(val=>val.email !== email) 
+      if (val) {
         let acctno = `0264${Math.floor(Math.random()*1000000)}`
         let cardno = `431${Math.floor(Math.random()*100000000)}`
         let bvn = `${Math.floor(Math.random()*100000000000000)}`
         let accountBal = 0;
-        let newUser = {firstname, lastname, email, password, phonenumber, acctno, cardno, bvn, accountBal}
+        let depositHistories = []
+        let withdrawalHistories =[]
+        let transferHistories = []
+        let allHistories = {depositHistories, withdrawalHistories, transferHistories}
+        let newUser = {firstname, lastname, email, password, phonenumber, acctno, cardno, bvn, accountBal, allHistories}
         let userArr = [...alluser, newUser]
         alert(`You have successfully been registered. Your account number is ${acctno}`)
         navigate('/signin')
         localStorage.applicants = JSON.stringify(userArr) 
-       }else {
+      }else {
+        alert('Email already exist, please sign up with another email account');
+        e.preventDefault();
+      }
+    }else {
         alert('Email already exist')
         e.preventDefault();
-       }
     }
   }
   return (

@@ -9,7 +9,6 @@ const Signin = () => {
   const [mail, setmail] = useState("")
   const [pass, setpass] = useState("")
   const [err, seterr] = useState("")
-  const [show, setshow] = useState(false)
   const applicantArr = JSON.parse(localStorage.applicants)
 
   const login = (e) => {
@@ -49,7 +48,7 @@ const Signin = () => {
               <p>Please sign in properly or register if you have not!</p>
             </div>
             <input type="text" placeholder='E-mail' className='form-control p-2'onChange={(e)=>setmail(e.target.value)} value = {mail} required/>
-            <input type="text" placeholder='Password' className='form-control p-2 mt-2' onChange={(e)=>setpass(e.target.value)} value= {pass} required />
+            <input type="password" placeholder='Password' className='form-control p-2 mt-2' onChange={(e)=>setpass(e.target.value)} value= {pass} required />
             <button className='btn text-white w-100 mt-4 mb-4' onClick={login}>Log in </button>
           <center>
           <Link  to = "/signup" className='text-decoration-none text-dark'><small className='pt-3'><i>Don't have an account? </i>

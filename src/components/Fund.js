@@ -27,14 +27,10 @@ const Fund = () => {
     let depositor = dash.firstname + " "+ dash.lastname
       let newdepositHistory = {depositor, amount, date, time}
       let allHistory = dash.allHistories.depositHistories
-      let depositHistories =[...allHistory, newdepositHistory]
-      // let depositHistories =[{depositor, amount, date, time}]
-      let withdrawalHistories =[]
-      let transferHistories = []
-      let allHistories = {depositHistories, withdrawalHistories, transferHistories}
-      setdash((d)=>({...d, accountBal:newBal, allHistories}))
-      localStorage.setItem("logins", JSON.stringify({...dash, accountBal:newBal, allHistories}));
-      let applicants = JSON.parse(localStorage.applicants).map((each, i)=>dash.email === each.email ? {...each, accountBal:newBal, allHistories} : each);
+      dash.allHistories.depositHistories =[...allHistory, newdepositHistory]
+      setdash((d)=>({...d, accountBal:newBal}))
+      localStorage.setItem("logins", JSON.stringify({...dash, accountBal:newBal}));
+      let applicants = JSON.parse(localStorage.applicants).map((each, i)=>dash.email === each.email ? {...each, accountBal:newBal} : each);
       localStorage.setItem("applicants", JSON.stringify(applicants));
       alert('Your account has been funded with $'+Number(amount))
       navigate('/dashboard')
@@ -55,7 +51,7 @@ const Fund = () => {
           <Link to = '/dashboard/fund' className= 'text-decoration-none text-light icon' title='Fund Acount'><i className="fa fa-money text-light mt-4 mx-3"></i></Link> <br />
           <Link to = '/dashboard/withdraw' className= 'text-decoration-none text-light icon' title='Withdraw'><i className="fa fa-credit-card-alt text-light mt-4 mx-3"></i></Link><br />
           <Link to = '/dashboard' className= 'text-decoration-none text-light icon' title='Settings'><i className="fa fa-cog text-light mt-4 mx-3"></i></Link><br />
-          <Link to = '/signin' className= 'text-decoration-none text-light icon' title='Sign out'><i className="fa fa-sign-out text-light mt-5 my-5 mx-3"></i></Link>
+          <Link to = '/signout' className= 'text-decoration-none text-light icon' title='Sign out'><i className="fa fa-sign-out text-light mt-5 my-5 mx-3"></i></Link>
       </div>
       <div className="col-md-1 dashContent bigScreen">
       <small className='px-3 text-white'>Welcome</small>
@@ -67,7 +63,7 @@ const Fund = () => {
           <Link to = '/dashboard/fund' className= 'text-decoration-none textColor icon' title='Fund Acount'><i className="fa fa-money mt-4 mx-3"></i></Link> 
           <Link to = '/dashboard/withdraw' className= 'text-decoration-none textColor icon' title='Withdraw'><i className="fa fa-credit-card-alt mt-4 mx-3"></i></Link>
           <Link to = '/dashboard' className= 'text-decoration-none textColor icon' title='Settings'><i className="fa fa-cog  mt-4 mx-3"></i></Link>
-          <Link to = '/signin' className= 'text-decoration-none textColor icon' title='Sign out'><i className="fa fa-sign-out"></i></Link>
+          <Link to = '/signout' className= 'text-decoration-none textColor icon' title='Sign out'><i className="fa fa-sign-out"></i></Link>
       </div>
       <div className="col-md-11 bg-light dashContent2 py-4">
         <div className="container my-5 shadow rounded w-75 ">
