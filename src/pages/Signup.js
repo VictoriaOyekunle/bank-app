@@ -23,8 +23,6 @@ import signup from '../images/card.jpg'
   
   const sign = (e) => {
     if (firstname !== "" && lastname !== "" && email !== "" && password !== "" && phonenumber !== "") { 
-      let val = applicantArr.find(val=>val.email !== email) 
-      if (val) {
         let acctno = `0264${Math.floor(Math.random()*1000000)}`
         let cardno = `431${Math.floor(Math.random()*100000000)}`
         let bvn = `${Math.floor(Math.random()*100000000000000)}`
@@ -37,14 +35,7 @@ import signup from '../images/card.jpg'
         let userArr = [...alluser, newUser]
         alert(`You have successfully been registered. Your account number is ${acctno}`)
         navigate('/signin')
-        localStorage.applicants = JSON.stringify(userArr) 
-      }else {
-        alert('Email already exist, please sign up with another email account');
-        e.preventDefault();
-      }
-    }else {
-        alert('Email already exist')
-        e.preventDefault();
+        localStorage.applicants = JSON.stringify(userArr)
     }
   }
   return (
