@@ -1,14 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   let dash = JSON.parse(localStorage.logins)
-  let welcome = `Welcome back, ${dash.firstname}😊`
+  let welcome =  dash.firstname
 
   let accountNo = dash.acctno
   let cardNo = dash.cardno
-  let bvnNo = dash.bvn
   let cardName = `${dash.lastname} ${dash.firstname}`
 
   return (
@@ -16,30 +13,41 @@ const Dashboard = () => {
     <div className="container-fluid">
    <div className="container-fluid p-0 dashContent">
    <div className="row">
-    <div className="col-md-2 dashContent text-white pt-3">
-      <h6 className='px-3 welcome'>{welcome}</h6>
-        <ul className='dashList'>
-          <Link to = '/dashboard' className='text-decoration-none text-light dashLi'><li className='pt-5'>Dashboard</li></Link>
-          <Link to ='/dashboard/profile' className= 'text-decoration-none text-light'><li className='pt-4'>Profile</li></Link>
-          <Link to = '/dashboard/transaction' className= 'text-decoration-none text-light'><li className='pt-4'>Transaction</li></Link>
-          <Link to = '/dashboard/transfer' className= 'text-decoration-none text-light'><li className='pt-4'>Transfer</li></Link>
-          <Link to = '/dashboard/fund' className= 'text-decoration-none text-light'><li className='pt-4'>Fund Account</li></Link>
-          <Link to = '/dashboard/withdraw' className= 'text-decoration-none text-light'><li className='pt-4'>Withdraw</li></Link>
-          <Link to = '/dashboard/settings' className= 'text-decoration-none text-light'><li className='pt-4'>Settings</li></Link>
-          <Link to = '/dashboard/signout' className= 'text-decoration-none text-light'><li className='pt-5 my-5 py-3'>Sign out</li></Link>
-        </ul>
+    <div className="col-md-1 dashContent text-white pt-3 smallScreen">
+      <small className='px-3 welcome'>Welcome</small>
+      <h5 className='mx-1'>{welcome}😊</h5>
+          <Link to = '/dashboard' className='text-decoration-none text-light icon' title='Dashboard'><i className="fa fa-home text-white mt-5 mx-3"></i></Link> <br />
+          <Link to ='/dashboard/profile' className= 'text-decoration-none text-light icon' title='Profile'><i className="fa fa-user text-light mt-4 mx-3"></i></Link> <br />
+          <Link to = '/dashboard/transaction' className= 'text-decoration-none text-light icon' title='Transaction'><i className="fa fa-line-chart text-light mt-4 mx-3"></i></Link> <br />
+          <Link to = '/dashboard/transfer' className= 'text-decoration-none text-light icon' title='Transfer'><i className="fa fa-paper-plane text-light mt-4 mx-3"></i></Link> <br />
+          <Link to = '/dashboard/fund' className= 'text-decoration-none text-light icon' title='Fund Acount'><i className="fa fa-money text-light mt-4 mx-3"></i></Link> <br />
+          <Link to = '/dashboard/withdraw' className= 'text-decoration-none text-light icon' title='Withdraw'><i className="fa fa-credit-card-alt text-light mt-4 mx-3"></i></Link><br />
+          <Link to = '/dashboard' className= 'text-decoration-none text-light icon' title='Settings'><i className="fa fa-cog text-light mt-4 mx-3"></i></Link><br />
+          <Link to = '/signin' className= 'text-decoration-none text-light icon' title='Sign out'><i className="fa fa-sign-out text-light mt-5 my-5 mx-3"></i></Link>
       </div>
-      <div className="col-md-10 bg-light dashContent2">
-        <div className="container">
+      <div className="col-md-1 dashContent bigScreen">
+      <small className='px-3 text-white'>Welcome</small>
+      <h5 className='mx-3 textColor h2'>{welcome}😊</h5>
+          <Link to = '/dashboard' className='text-decoration-none textColor icon' title='Dashboard'><i className="fa fa-home"></i></Link> 
+          <Link to ='/dashboard/profile' className= 'text-decoration-none textColor icon' title='Profile'><i className="fa fa-user mt-4 mx-3"></i></Link> 
+          <Link to = '/dashboard/transaction' className= 'text-decoration-none textColor icon' title='Transaction'><i className="fa fa-line-chart mt-4 mx-3"></i></Link> 
+          <Link to = '/dashboard/transfer' className= 'text-decoration-none textColor icon' title='Transfer'><i className="fa fa-paper-plane mt-4 mx-3"></i></Link>
+          <Link to = '/dashboard/fund' className= 'text-decoration-none textColor icon' title='Fund Acount'><i className="fa fa-money mt-4 mx-3"></i></Link> 
+          <Link to = '/dashboard/withdraw' className= 'text-decoration-none textColor icon' title='Withdraw'><i className="fa fa-credit-card-alt mt-4 mx-3"></i></Link>
+          <Link to = '/dashboard' className= 'text-decoration-none textColor icon' title='Settings'><i className="fa fa-cog  mt-4 mx-3"></i></Link>
+          <Link to = '/signin' className= 'text-decoration-none textColor icon' title='Sign out'><i className="fa fa-sign-out"></i></Link>
+      </div>
+      <div className="col-md-11 bg-light dashContent2">
+        <div className="container ">
           <div className="row">
-          <div className="col-md-3 mt-3 pt-2 mx-4 shadow">
+          <div className="col-md-3 mt-4 pt-2 shadow noMargin">
               <h6>Main Account</h6>
               <h2 className='text-center brandText2'>Your Balance is</h2>
               <p className='text-center h5'>$ {dash.accountBal} USD</p>
             </div>
           </div>
           <div className="row my-5">
-          <div className="col-md-3 atmCard dashColor mt-3 text-light pt-2 mx-4">
+          <div className="col-md-3 atmCard dashColor mt-3 text-light pt-2">
               <h3>VISA</h3>
               <h5 className='mx-5'>Onlyn Banking</h5>
               <h4 className='text-center'>{cardName}</h4>
@@ -47,7 +55,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3 shadow mx-4 my-4 bg-light pt-2">
+            <div className="col-md-3 shadow my-4 bg-light pt-2">
               <h6>Account Number</h6>
               <h3 className='text-center brandText2 pt-3'>Your Number is </h3>
               <h2 className='text-center'>{accountNo}</h2>

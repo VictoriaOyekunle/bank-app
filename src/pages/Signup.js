@@ -19,12 +19,12 @@ import signup from '../images/card.jpg'
   
   const sign = (e) => {
     if (firstname !== "" && lastname !== "" && email !== "" && password !== "" && phonenumber !== "") { 
-      let val = applicantArr.find(val=>val.email !== email)
+      let val = applicantArr.filter(val=>val.email !== email)
        if (val) {
         let acctno = `0264${Math.floor(Math.random()*1000000)}`
         let cardno = `431${Math.floor(Math.random()*100000000)}`
         let bvn = `${Math.floor(Math.random()*100000000000000)}`
-        let accountBal = '0';
+        let accountBal = 0;
         let newUser = {firstname, lastname, email, password, phonenumber, acctno, cardno, bvn, accountBal}
         let userArr = [...alluser, newUser]
         alert(`You have successfully been registered. Your account number is ${acctno}`)
